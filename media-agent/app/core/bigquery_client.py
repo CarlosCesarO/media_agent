@@ -1,6 +1,7 @@
 from google.cloud import bigquery
 from google.oauth2 import service_account
 from app.core.config import settings
+from google.api_core.exceptions import GoogleAPIError
 
 
 def get_bq_client() -> bigquery.Client:
@@ -15,13 +16,13 @@ def get_bq_client() -> bigquery.Client:
 
 
 def run_query(sql: str, params: list | None = None) -> list[dict]:
-    client = get_bq_client()
-
-    job_config = bigquery.QueryJobConfig()
-    if params:
-        job_config.query_parameters = params
-
-    query_job = client.query(sql, job_config=job_config)
-    results = query_job.result()
-
-    return [dict(row) for row in results]
+    try:
+        client = get_bq_client()
+        job_config = bigquery.QueryJobConfig()
+        if params:
+            job_config.query_parameters = params
+        query_job = client.query(sql, job_config=job_config)
+        results = query_job.result()
+        return [dict(row) for row in results]
+    except GoogleAPIError as e:
+        raise RuntimeError(f"Erro no BigQuery: {e.message}") from e

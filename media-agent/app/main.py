@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from app.api.routes import router
 
 app = FastAPI(
-    title="Media Analyst Agent",
+    title="Media Agent",
     description="Agente de IA para análise de canais de mídia",
     version="1.0.0",
 )
