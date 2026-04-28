@@ -56,17 +56,3 @@ uvicorn app.main:app --reload
 ```
 
 Acesse `http://localhost:8000/docs` para a documentação interativa.
-
-## Exemplos de uso
-
-```bash
-# Volume de um canal
-curl -X POST http://localhost:8000/api/v1/query \
-  -H "Content-Type: application/json" \
-  -d '{"question": "Como foi o volume de usuários vindos de Search no último mês?"}'
-
-# Comparativo geral
-curl -X POST http://localhost:8000/api/v1/query \
-  -H "Content-Type: application/json" \
-  -d '{"question": "Qual dos canais tem a melhor performance?"}'
-```
