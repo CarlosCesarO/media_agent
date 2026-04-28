@@ -1,4 +1,4 @@
-# 🤖 Media Analyst Agent
+# Media Analyst Agent
 
 Agente de IA Autônomo que atua como **Analista Júnior de Mídia**, respondendo perguntas em linguagem natural sobre performance de canais de tráfego com dados reais do BigQuery.
 
@@ -70,23 +70,3 @@ curl -X POST http://localhost:8000/api/v1/query \
   -H "Content-Type: application/json" \
   -d '{"question": "Qual dos canais tem a melhor performance?"}'
 ```
-
-## Estrutura do projeto
-
-```
-media-agent/
-├── app/
-│   ├── main.py                 # Entrypoint FastAPI
-│   ├── api/routes.py           # Endpoints REST
-│   ├── agent/media_agent.py    # LangGraph ReAct Agent
-│   ├── tools/bigquery_tools.py # 4 tools com @tool decorator
-│   ├── models/schemas.py       # Pydantic models
-│   └── core/
-│       ├── config.py           # Settings com pydantic-settings
-│       └── bigquery_client.py  # Cliente BQ parametrizado
-└── tests/
-```
-
-## Segurança
-
-- Queries 100% parametrizadas via `bigquery.ScalarQueryParameter`
